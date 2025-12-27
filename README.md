@@ -14,7 +14,7 @@ Instead of consuming unorganized content, learners can now follow a **clear acad
 
 The project focuses on **organization, scalability, and maintainability**, while keeping the system lightweight and open for future expansion.
 
----
+
 
 ## Motivation
 
@@ -27,7 +27,6 @@ Gauravaani was built to solve this problem by:
 
 This project is not just a website — it is a **framework for structured spiritual education**.
 
----
 
 ## Features
 
@@ -59,7 +58,7 @@ Admins can:
 - Contact page powered using **Brevo API**
 - Secure handling of messages without exposing backend email logic
 
----
+
 
 ## Tech Stack
 
@@ -74,7 +73,7 @@ Admins can:
 ### Frontend
 - HTML, CSS, JavaScript (templated via Flask)
 
----
+
 
 ## Architecture Highlights
 
@@ -83,7 +82,7 @@ Admins can:
 - Role-based access control
 - Designed for **easy migration and future extensibility**
 
----
+
 
 ## Why Supabase?
 
@@ -92,7 +91,7 @@ Admins can:
 - Simplifies data updates without redeploying the application  
 - Scales naturally as content grows  
 
----
+
 
 ## Development Timeline 🛠️
 
@@ -100,7 +99,7 @@ Admins can:
 **Development Style:** Rapid prototyping → iterative refinement → production hardening  
 **Version Control:** Git (incremental commits reflecting architectural decisions and bug fixes)
 
----
+
 
 ### Phase 1: Foundation & Core Models *(Nov 23)*
 - Initialized project structure
@@ -108,7 +107,7 @@ Admins can:
 - Established backend architecture using **Flask**
 - Defined early database schema
 
----
+
 
 ### Phase 2: Admin System & Role Control *(Nov 25)*
 - Built **Admin Panel**
@@ -116,7 +115,7 @@ Admins can:
 - Added course status controls
 - Enabled admin-level content management
 
----
+
 
 ### Phase 3: Course Navigation & UX *(Nov 26)*
 - Added **Courses Page**
@@ -124,7 +123,6 @@ Admins can:
 - Fixed ordering and navigation bugs
 - Converted static data into **JSON-driven structure**
 
----
 
 ### Phase 4: Contact System & UI Refinements *(Nov 26 – Nov 27)*
 - Added **Contact Page**
@@ -133,7 +131,7 @@ Admins can:
 - Cleaned unnecessary database fields
 - Iteratively refined contact workflow
 
----
+
 
 ### Phase 5: Database & Production Readiness *(Late Nov)*
 - Migrated to **Supabase PostgreSQL**
@@ -142,7 +140,7 @@ Admins can:
 - Introduced environment variables
 - Added `Procfile` for deployment readiness
 
----
+
 
 ### Phase 6: Data Cleanup & Architecture Improvements *(Late Nov – Recent)*
 - Normalized database tables
@@ -152,7 +150,7 @@ Admins can:
 - Improved sidebar UX and active state handling
 - Final fixes to Contact Page using **Brevo API**
 
----
+
 
 ### Current State
 - Fully functional **role-based educational platform**
@@ -160,7 +158,7 @@ Admins can:
 - Clean, scalable backend architecture
 - Repository remains lightweight and maintainable
 
----
+
 
 **Note:**  
 This project was built with a focus on **clarity of architecture, scalability, and real-world maintainability**, rather than superficial feature count.
@@ -179,7 +177,7 @@ If you resonate with the idea of **structured spiritual education**, feel free t
 
 > Knowledge grows best when it is built together.
 
----
+
 
 ## Final Note 🌱
 
@@ -190,7 +188,7 @@ Fork it. Break it. Rebuild it. Improve it.
 
 That is how knowledge evolves.
 
----
+
 ## License
 This project is licensed under the MIT License.
 See the [LICENSE](LICENSE) for more details
