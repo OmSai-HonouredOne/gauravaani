@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %}{{ lecture.lec_title }} - {{ params.name }}{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+
+    <!-- BREADCRUMB -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb spiritual-breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('courses.index') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('courses.courses') }}">Courses</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('courses.view_course', course_id=course.course_id) }}">{{ course.course_title }}</a></li>
+            <li class="breadcrumb-item"><a href="#">Chapter {{ lecture.course_chapter }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Lecture {{ lecture.lec_no }}</li>
+        </ol>
+    </nav>
+
+    <div class="row g-4">
+
+        <!-- MAIN VIDEO SECTION -->
+        <div class="col-lg-9">
+            <div class="admin-panel p-3">
+
+                <h3 class="mb-3 text-center">
+                    Chapter {{ lecture.course_chapter }} · Lecture {{ lecture.lec_no }}
+                    <br>
+                    <span>{{ lecture.lec_title }}</span>
+                </h3>
+
+                <!-- YouTube Player -->
+                <div class="ratio ratio-16x9 mb-4">
+                    <iframe 
+                        src="https://www.youtube.com/embed/{{ lecture.lec_url.rsplit('/', 1)[-1] }}"
+                        title="{{ lecture.lec_title }}"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+
+                <!-- ACTION BUTTONS -->
+                <div class="d-flex flex-wrap gap-2 mt-3">
+                    <a href="{{ lecture.lec_url }}" 
+                       target="_blank" 
+                       class="btn btn-danger">
+                        ▶ Watch on YouTube
+                    </a>
+
+                    {% if lecture.notes_url %}
+                    <a href="{{ lecture.notes_url }}" class="btn btn-outline-primary">
+                        📒 View Notes
+                    </a>
+                    {% else %}
+                    <span class="btn btn-outline-secondary disabled">
+                        📒 No Notes Available
+                    </span>
+                    {% endif %}
+                </div>
+
+                <!-- SUMMARY -->
+                <div class="lecture-summary mt-4">
+                    <h5 class="mb-2">Lecture Summary</h5>
+                    <p class="form-text summary-text">
+                        {{ lecture.lec_summary or 'No summary available for this lecture yet.'}}
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+<div class="col-lg-3">
+    <div class="admin-panel p-3 lecture-sidebar" style="max-height: 80vh; overflow-y: auto;">
+        <h5 class="mb-3 text-center">All Lectures</h5>
+
+        <ul class="list-group lecture-list">
+            {% for lec in all_lectures %}
+            <a href="{{ url_for('courses.view_lecture', course_id=course.course_id, course_chapter=lec.course_chapter, lec_no=lec.lec_no) }}"
+               class="list-group-item list-group-item-action {% if lec.lid == lecture.lid %}active{% endif %}">
+                <div class="small text-muted {% if lec.lid != lecture.lid %}not-active{% endif %}">
+                    Ch {{ lec.course_chapter }} · Lec {{ lec.lec_no }}
+                </div>
+                <div class="fw-semibold">
+                    {{ lec.lec_title }}
+                </div>
+            </a>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "admin/baseadmin.html" %}
+
+{% block title %}Edit Course | Admin{% endblock %}
+
+{% block content %}
+<div>
+    <!-- BREADCRUMB -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb spiritual-breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('courses.index') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.dashboard') }}">Admin</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.manage_courses') }}">Manage Courses</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ course.course_title }}</li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Course</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="row justify-content-center my-5">
+  <div class="col-md-8">
+    <div class="admin-panel">
+      <h2 class="mb-4 text-center">Edit Course</h2>
+
+      <form method="POST" enctype="multipart/form-data">
+
+        <div class="mb-3">
+          <label class="form-label">Course ID</label>
+          <input type="text" class="form-control" name="course_id" value="{{ course.course_id }}" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Course Title</label>
+          <input type="text" class="form-control" name="course_title" value="{{ course.course_title }}" required>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Course Description</label>
+          <textarea class="form-control summary-text" name="course_description" rows="4" required>{{ course.course_description }}</textarea>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Current Image</label><br>
+          {% if course.course_image %}
+            <img src="{{ course.course_image }}"
+                 alt="Course Image"
+                 class="img-fluid rounded mb-2"
+                 style="max-height:180px;">
+          {% else %}
+            <p class="form-text">No image uploaded</p>
+          {% endif %}
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Replace Course Image (JPG only)</label>
+          <input type="file" class="form-control" name="course_image" accept=".jpg,.jpeg">
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+          <a href="{{ url_for('admin.manage_courses') }}" class="btn btn-secondary px-4">Cancel</a>
+          <button type="submit" class="btn btn-spiritual px-4">Update Course</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

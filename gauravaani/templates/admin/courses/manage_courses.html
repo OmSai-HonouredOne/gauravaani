@@ -1,0 +1,97 @@
+{% extends "admin/baseadmin.html" %}
+
+{% block title %}Manage Courses | Admin{% endblock %}
+
+{% block content %}
+<div>
+    <!-- BREADCRUMB -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb spiritual-breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('courses.index') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.dashboard') }}">Admin</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Manage Courses</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="d-flex justify-content-between align-items-center my-5">
+    <h2 class="section-title">Manage Courses</h2>
+    <a href="{{ url_for('admin.add_course') }}" class="btn btn-spiritual">
+        + Add Course
+    </a>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-dark table-hover align-middle spiritual-table">
+    <thead>
+      <tr>
+        <th>CID</th>
+        <th>Course ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Edit</th>
+        <th>View Lectures</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for course in courses %}
+      <tr>
+        <td>{{ course.cid }}</td>
+        <td>{{ course.course_id }}</td>
+        <td>{{ course.course_title }}</td>
+        <td>{{ course.course_description[:40] }}...</td>
+        <!-- Status -->
+        <td>
+          {% if course.course_complete %}
+            <span class="badge bg-success mb-2">Complete</span><br>
+          {% else %}
+            <span class="badge bg-secondary mb-2">On Going</span><br>
+          {% endif %}
+            <a href="{{ url_for('admin.toggle_course_status', cid=course.cid) }}"
+               class="btn btn-warning btn-sm">
+               Toggle
+            </a>
+        </td>
+        <!-- Edit -->
+        <td>
+          <a href="{{ url_for('admin.edit_course', cid=course.cid) }}"
+             class="btn btn-info btn-sm">
+             Edit
+          </a>
+        </td>
+
+        <!-- View Lectures -->
+        <td>
+          <a href="{{ url_for('admin.manage_lectures', course_id=course.course_id) }}"
+             class="btn btn-primary btn-sm">
+             View Lectures
+          </a>
+        </td>
+
+        <!-- Delete with double confirmation -->
+        <td>
+          <button class="btn btn-danger btn-sm"
+                  onclick="confirmDelete('{{ course.cid }}')">
+            Delete
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+<script>
+function confirmDelete(cid) {
+    if (confirm("⚠ Are you sure you want to delete this course?")) {
+        if (confirm("This action CANNOT be undone. Delete permanently?")) {
+            window.location.href = `/admin/delete_course/${cid}`;
+        }
+    }
+}
+</script>
+
+{% endblock %}

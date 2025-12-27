@@ -1,0 +1,50 @@
+{% extends 'admin/baseadmin.html' %}
+
+{% block title %}Add Course | Admin{% endblock %}
+
+{% block content %}
+<div>
+    <!-- BREADCRUMB -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb spiritual-breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('courses.index') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.dashboard') }}">Admin</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.manage_courses') }}">Manage Courses</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Course</li>
+        </ol>
+    </nav>
+</div>
+
+<div class=" p-4">
+    <h2 class="mb-4 text-center">Add New Course</h2>
+
+    <form method="POST" action="{{ url_for('admin.add_course') }}" enctype="multipart/form-data" class="row g-3">
+
+        <div class="col-md-6">
+            <label for="course_id" class="form-label">Course ID</label>
+            <input type="text" class="form-control spiritual-input" id="course_id" name="course_id" required>
+        </div>
+
+        <div class="col-md-6">
+            <label for="course_title" class="form-label">Course Title</label>
+            <input type="text" class="form-control spiritual-input" id="course_title" name="course_title" required>
+        </div>
+
+        <div class="col-12">
+            <label for="course_description" class="form-label">Course Description</label>
+            <textarea class="form-control summary-text" id="course_description" name="course_description" rows="4" required></textarea>
+        </div>
+
+        <div class="col-12">
+            <label for="course_image" class="form-label">Course Image</label>
+            <input type="file" class="form-control spiritual-input" id="course_image" name="course_image" accept="image/jpeg" required>
+        </div>
+
+        <div class="col-12 text-center mt-4">
+            <button type="submit" class="btn btn-success px-5 py-2">Add Course</button>
+            <a href="{{ url_for('admin.manage_courses') }}" class="btn btn-secondary px-4 py-2 ms-2">Cancel</a>
+        </div>
+
+    </form>
+</div>
+{% endblock %}

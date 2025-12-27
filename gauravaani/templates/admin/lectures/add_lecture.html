@@ -1,0 +1,118 @@
+{% extends "admin/baseadmin.html" %}
+
+{% block title %}Add Lecture | Admin{% endblock %}
+
+{% block content %}
+
+<style>
+/* Override flex centering from global CSS */
+body {
+    display: block !important;
+}
+</style>
+
+<div>
+    <!-- BREADCRUMB -->
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb spiritual-breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ url_for('courses.index') }}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.dashboard') }}">Admin</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.manage_courses') }}">Manage Courses</a></li>
+            <li class="breadcrumb-item"><a href="{{ url_for('admin.manage_lectures', course_id=course_id) }}">{{ course.course_title }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Lecture</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="container-fluid admin-panel my-5">
+
+  <div class="admin-panel">
+    <h2 class="text-center mb-4">Add Lecture</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Course ID</label>
+          <input type="text"
+                 name="course_id"
+                 class="form-control"
+                 value="{{ course_id }}"
+                 readonly>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Course Chapter</label>
+          <input type="text"
+                 name="course_chapter"
+                 class="form-control"
+                 placeholder="e.g. Chapter 1"
+                 required>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label class="form-label">Lecture Number</label>
+          <input type="number"
+                 name="lec_no"
+                 class="form-control"
+                 placeholder="e.g. 1"
+                 required>
+        </div>
+
+        <div class="col-md-8 mb-3">
+          <label class="form-label">Lecture Title</label>
+          <input type="text"
+                 name="lec_title"
+                 class="form-control"
+                 placeholder="Enter lecture title"
+                 required>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Lecture Summary</label>
+        <textarea name="lec_summary"
+                  class="form-control summary-text"
+                  rows="4"
+                  placeholder="Brief summary of the lecture..."></textarea>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Lecture YouTube URL</label>
+          <input type="url"
+                 name="lec_url"
+                 class="form-control"
+                 placeholder="https://youtube.com/..."
+                 required>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Notes URL (optional)</label>
+          <input type="url"
+                 name="notes_url"
+                 class="form-control"
+                 placeholder="Drive / PDF link">
+        </div>
+      </div>
+
+      <div class="text-end mt-4">
+        <a href="{{ url_for('admin.manage_lectures', course_id=course.course_id) }}"
+           class="btn btn-outline-light me-2">
+           Cancel
+        </a>
+
+        <button type="submit"
+                class="btn btn-spiritual">
+          Save Lecture
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+{% endblock %}
