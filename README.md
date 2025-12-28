@@ -4,6 +4,11 @@
 ## Live Preview
 🔗 https://gauravaani.onrender.com/
 
+## Full System Walkthrough
+This video is a complete walkthrough of Gauravaani. Since the admin panel cannot be publicly exposed, this video demonstrates internal workflows, design decisions, and real usage that may not be visible from the live site alone.
+
+🔗 https://youtu.be/UU4sUusNxBQ?si=Tqb_j06NpJvlflEG
+
 ## Overview
 
 **Gauravaani** is a spiritual educational website built to transform a **large, cluttered YouTube lecture archive** into a **well-structured, curriculum-driven learning platform**.
