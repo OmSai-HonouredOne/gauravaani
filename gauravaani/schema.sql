@@ -1,46 +1,44 @@
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS courses;
-DROP TABLE IF EXISTS lectures;
-DROP TABLE IF EXISTS contact;
+-- WARNING: This schema is for context only and is not meant to be run.
+-- Table order and constraints may not be valid for execution.
 
-
-CREATE TABLE users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT NOT NULL,
-    password TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE,
-    admin BOOLEAN NOT NULL DEFAULT 0
+CREATE TABLE public.contact (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  name text NOT NULL,
+  email text NOT NULL,
+  subject text NOT NULL,
+  message text NOT NULL,
+  pending boolean NOT NULL DEFAULT true,
+  is_reply boolean NOT NULL DEFAULT false,
+  CONSTRAINT contact_pkey PRIMARY KEY (id)
 );
-
-CREATE TABLE courses (
-    cid INTEGER PRIMARY KEY AUTOINCREMENT,
-    course_id TEXT NOT NULL UNIQUE,
-    course_title TEXT NOT NULL,
-    course_description TEXT,
-    course_image TEXT NOT NULL,
-    course_complete BOOLEAN NOT NULL DEFAULT 0,
-    course_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE public.courses (
+  cid bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  course_id text NOT NULL UNIQUE,
+  course_title text NOT NULL,
+  course_description text,
+  course_image text NOT NULL,
+  course_complete boolean NOT NULL DEFAULT false,
+  course_created_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT courses_pkey PRIMARY KEY (cid)
 );
-
-CREATE TABLE lectures (
-    lid INTEGER PRIMARY KEY AUTOINCREMENT,
-    cid INTEGER NOT NULL,
-    course_chapter INTEGER NOT NULL,
-    lec_no FLOAT NOT NULL,
-    lec_title TEXT NOT NULL,
-    lec_summary TEXT NOT NULL,
-    lec_url TEXT NOT NULL,
-    notes_url TEXT,
-    lec_created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (cid) REFERENCES courses(cid)
+CREATE TABLE public.lectures (
+  lid bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  cid bigint NOT NULL,
+  course_chapter bigint NOT NULL,
+  lec_no bigint NOT NULL,
+  lec_title text NOT NULL,
+  lec_summary text NOT NULL,
+  lec_url text NOT NULL,
+  notes_url text,
+  lec_created_at timestamp with time zone NOT NULL DEFAULT now(),
+  CONSTRAINT lectures_pkey PRIMARY KEY (lid),
+  CONSTRAINT lectures_cid_fkey FOREIGN KEY (cid) REFERENCES public.courses(cid)
 );
-
-CREATE TABLE contact (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    email TEXT NOT NULL,
-    subject TEXT NOT NULL,
-    message TEXT NOT NULL,
-    pending BOOLEAN NOT NULL DEFAULT 1,
-    is_reply BOOLEAN NOT NULL DEFAULT 0
+CREATE TABLE public.users (
+  id bigint GENERATED ALWAYS AS IDENTITY NOT NULL,
+  username text NOT NULL,
+  password text NOT NULL,
+  email text NOT NULL UNIQUE,
+  admin boolean DEFAULT false,
+  CONSTRAINT users_pkey PRIMARY KEY (id)
 );
